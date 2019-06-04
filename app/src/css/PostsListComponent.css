@@ -1,0 +1,9 @@
+/*Posts list Component Styles*/
+
+.posts-list{ width: 100%; max-width: 500px; margin: 24px auto 0 auto;}
+.posts-list .post{padding:16px 12px; margin:0 0 16px 0; background: white;  border-radius: 3px; box-shadow: 0 0 4px lightgray;}
+.posts-list .user-container{margin: 0 0 16px 0}
+.posts-list .user-img{display: inline-block; width: 40px; height: 40px; background: lightgray; border-radius: 100%;}
+.posts-list .user{display: inline-block; vertical-align:top; margin: 5px 0 0 8px; color: #385898; font-weight: 600; font-size: 16px;}
+.posts-list .user time{display:block; font-size: 12px; color: #333; font-weight: normal}
+.posts-list .message{font-size: 14px; line-height: 18px;}

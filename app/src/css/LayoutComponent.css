@@ -1,0 +1,8 @@
+/* LayoutComponent styles */
+
+.main{position: relative;}
+.main .stack{ width: 150px; position: absolute; left: 2%; top:0;}
+
+@media screen and (max-width: 1024px) {
+    .main .stack{display: none;}
+}

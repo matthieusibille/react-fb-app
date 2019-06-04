@@ -1,0 +1,9 @@
+/* UserListComponent styles */
+
+.user-list-container{ width: 250px; position: absolute; top:0; right: 0; background: white; border-radius: 3px; box-shadow: 0 0 4px lightgrey; }
+.user-list{padding: 0 16px 16px 16px;}
+.user-list span{display: inline-block;}
+.user-list .status{width: 8px; height: 8px; margin:0 5px 0 0; border-radius: 100%; background: lightgray;}
+.user-list .status.online{background: lightgreen;}
+.user-list .user, .user-list .emptyList{font-size: 14px;}
+.user-list .emptyList{}

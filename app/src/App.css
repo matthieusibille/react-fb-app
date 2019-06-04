@@ -1,0 +1,17 @@
+/*FONTS*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/* GLOBAL */
+*{padding:0; margin:0; font-family: 'Roboto', sans-serif;}
+a{text-decoration: none; color: inherit;}
+body{background: #e9ebee;}
+:focus{outline: none}
+ul{list-style: none;}
+
+.btn-validate{display: inline-block; margin: 0; padding: 6px 8px; cursor: pointer; background: #4267b2; color:white; border:1px solid #29487d; border-radius: 3px; box-sizing: border-box;}
+
+button,
+input[type='radio']{cursor: pointer;}
+
+.header-label{display: block; margin: 0 0 16px 0; padding: 8px 12px; font-size: 16px; background: #f5f6f7; border-radius: 3px 3px 0 0; border-bottom: 1px solid #dddfe2; font-size: 14px; font-weight: 600; color: #4b4f56;}
+.header-label span{font-size: 10px;  font-weight: normal}
