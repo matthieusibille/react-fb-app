@@ -22,7 +22,7 @@ module.exports = {
         }
 
         req.userId = payload.subject
-        console.log('req.userId ',req.userId );
+        /* console.log('jwt user id ',req.userId ); */
         
         next()
     }

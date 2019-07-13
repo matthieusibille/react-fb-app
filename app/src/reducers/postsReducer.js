@@ -10,6 +10,8 @@ export default function postsReducer(state = initState, action){
         case 'GET_POSTS_LIST':{
             return { posts: action.payload }
         }    
+        default:{
+            return {...state}  
+        }
     }
-    return state
 }

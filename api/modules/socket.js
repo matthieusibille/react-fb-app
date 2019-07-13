@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 
 //MODELS
 const User = require('../models/user');
+const Posts = require('../models/posts')
+
+const moment = require('moment')
 
 module.exports = (io) => {
 
@@ -10,6 +13,8 @@ module.exports = (io) => {
 
         const updateUserList = (token, status) => {
             let payload = jwt.verify(token, 'privatekey')
+            //console.log("payload", payload);
+            
             if (payload) {
                 User.findOne(
                     { _id: payload.subject }, (err, user) => {
@@ -40,16 +45,17 @@ module.exports = (io) => {
 
         socket.on('userConnected', (token) => {
             //console.log('connected')
-            updateUserList(token, true)
+            updateUserList(token, true)    
         })
 
         socket.on('userDisconnected', (token) => {
-            //console.log('discconnected')
+            //console.log('discconnected', token)
             updateUserList(token, false)
         })
-
-        socket.on('newPostPublished', (data) => {
-            socket.broadcast.emit('updatePostsList', data)
+        
+        socket.on('newPostPublished', (post) => {
+            //socket.broadcast.emit('updatePostsList', data)
+            socket.broadcast.emit('updatePostsList', post)
         })
 
     })

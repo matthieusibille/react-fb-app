@@ -8,8 +8,8 @@ import userReducer from './reducers/userReducer'
 import postsReducer from './reducers/postsReducer'
 
 const reducers = combineReducers({
-    user:userReducer,
-    posts:postsReducer
+    data: userReducer,
+    posts: postsReducer
 })
 
 const middleware = applyMiddleware(/* createLogger(), */thunk)

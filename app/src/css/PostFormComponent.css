@@ -1,7 +1,0 @@
-/*Post From Component Styles*/
-
-.post-form{ width: 100%; max-width: 500px; margin: 24px auto 0 auto; background: white; border-radius: 3px; box-shadow: 0 0 4px lightgray}
-.post-form textarea{display: block; width: 100%; max-width: 480px; height:auto; margin: 0 12px; border:none; border-bottom: 1px solid lightgrey; box-sizing: border-box; font-family: sans-serif; resize: none;}
-.post-form textarea::-webkit-input-placeholder{font-family: sans-serif;}
-.post-form button.btn-validate{margin: 16px 0 16px 12px}
-

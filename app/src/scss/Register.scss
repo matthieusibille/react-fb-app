@@ -1,0 +1,18 @@
+/* Register component styles */
+.form-container{
+    
+    h2{padding: 16px 12px 0 12px; margin:0 0 24px 0; font-weight: 600;
+        span{
+            &:first-child{ display: block; font-size: 32px;}
+            &:nth-child(2){ font-size: 18px; font-weight: normal}
+            &:last-child{ font-size: 10px; font-weight: normal }
+        }
+    }
+
+    .form{
+        .name{ display: flex;
+            input:first-child{margin-right: 8px}
+        }
+    }
+
+}

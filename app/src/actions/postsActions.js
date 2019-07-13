@@ -1,12 +1,16 @@
 import axios from 'axios'
+
+import {apiUrl, insertPostUrl, getPostsListUrl} from '../const/api'
+
 import connectToSocket from 'socket.io-client';
-const socket = connectToSocket('https://ms-demo-react-api.herokuapp.com');
+const socket = connectToSocket(apiUrl);
 
-export const insertNewPost = (token, message) => {
-
+export const insertNewPost = (message) => {
     return dispatch => {
-        let serverPayload = { message: message }
-        axios.post('https://ms-demo-react-api.herokuapp.com/api/insert-post', serverPayload, {
+        let token = localStorage.getItem('token')
+        let msg = message
+
+        axios.post(insertPostUrl, {message: msg}, {
             headers: {
                 authorization: 'Bearer ' + token
             }
@@ -28,7 +32,7 @@ export const insertNewPost = (token, message) => {
 export const getPostsList = () => {
     return dispatch => {
 
-        axios.get('https://ms-demo-react-api.herokuapp.com/api/posts')
+        axios.get(getPostsListUrl)
             .then(response => {
                 dispatch({
                     type: 'GET_POSTS_LIST',
@@ -53,3 +57,10 @@ export const updatePostsList = () => {
     }
 
 }
+
+export const clearSockets = () =>{
+    return dispatch => {
+        socket.removeListener('updatePostsList')
+    }
+}
+

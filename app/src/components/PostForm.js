@@ -1,48 +1,47 @@
-import React, { Component } from 'react'
-import '../css/PostFormComponent.css'
-import {connect} from 'react-redux'
-import {insertNewPost} from '../actions/postsActions'
+import React, { useState } from 'react'
 
-class PostForm extends Component {
+import { connect } from 'react-redux'
+import { insertNewPost } from '../actions/postsActions'
 
-    constructor(props) {
-        super(props)
+import '../scss/PostForm.scss'
 
-        this.state = {
-            message:''
-        }
-    }
+function PostForm(props) {
 
-    changeHandler = (e) => {
-        this.setState({
+    const [state, setState] = useState({ message: '' })
+    const { message } = state
+
+    const changeHandler = (e) => {
+        setState({
+            ...state,
             message: e.target.value
         })
     }
 
-    submitHandler = (e) =>{
+    const submitHandler = (e) => {
         e.preventDefault()
-        let token = localStorage.getItem('token')
-        this.props.onInsertNewPost(token, this.state.message)
-        this.setState({
+        props.onInsertNewPost(state.message)
+        setState({
+            ...state,
             message: ''
         })
     }
 
-    render() {
-        const { message } = this.state
-        return (
-            <div className="post-form">
-                <label className="header-label">
-                    Créer une publication <span>...même si tu sais très bien que ca n'intéresse personne</span>
-                </label>
-                <form onSubmit={this.submitHandler}>
-                    <textarea name="body" value={message} onChange={this.changeHandler} placeholder='Exprime toi !'></textarea>
-                    <button className="btn-validate" type="submit">Publier</button>
-                </form>
-            </div>
-        )
-    }
+    return (
+        <div className="form-container">
+
+            <label className="header-label">
+                Créer une publication <span>...même si tu sais très bien que ca n'intéresse personne</span>
+            </label>
+
+            <form  className="form" onSubmit={submitHandler}>
+                <textarea name="body" value={message} onChange={changeHandler} placeholder='Exprime toi !'></textarea>
+                <button className="btn-validate btn-blue" type="submit">Publier</button>
+            </form>
+
+        </div>
+    )
 }
+
 
 /* const mapStateToProps = (state) => {
     return{
@@ -50,8 +49,8 @@ class PostForm extends Component {
      }
 } */
 const mapDispatchToProps = (dispatch) => {
-    return{ 
-        onInsertNewPost : (token, message) =>{ dispatch(insertNewPost(token, message) ) }
+    return {
+        onInsertNewPost: (message) => { dispatch(insertNewPost(message)) }
     }
 }
 

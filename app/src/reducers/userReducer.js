@@ -3,7 +3,8 @@ import produce from 'immer'
 const initState = {
     token: undefined,
     user: undefined,
-    userList: []
+    userList: [],
+    error:''
 }
 
 export default function userReducer(state = initState, action){
@@ -11,8 +12,8 @@ export default function userReducer(state = initState, action){
         case 'UPDATE_USER':{
             return { ...state, token: action.payload.token, user: action.payload.user }
         }    
-        case 'CLEAR_USER_DATA':{
-            return { token: undefined, user: undefined, userList: [...state.userList] }
+        case 'CLEAR_USER_DATA':{  
+            return { token: undefined, user: undefined, userList: [] }
         }    
         case 'GET_USER_LIST':{
             return { ...state, userList: action.payload }
@@ -22,7 +23,7 @@ export default function userReducer(state = initState, action){
             let newState = produce( state, draftState => {
 
                 let userIndex = state.userList.findIndex(user => user._id === action.payload._id);
-                if(userIndex != -1){
+                if(userIndex !== -1){
                     draftState.userList[userIndex].online = action.payload.online;
                 }else{
                     let newUser = {
@@ -40,8 +41,13 @@ export default function userReducer(state = initState, action){
                 userList: newState.userList
             }
  
-        }    
+        }
+        case 'USER_LOGIN_ERROR':{
+            return { ...state, error: action.payload}
+        }
+        default:{
+            return {...state}  
+        }        
     }
-    return state
 
 }

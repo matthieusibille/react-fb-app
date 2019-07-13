@@ -30,12 +30,10 @@ module.exports = {
                     post.author = userID;
                     post.message = req.body.message;
                     post.timeStamp = timeStamp;
-
                     post.save((err, postSaved) => {
                         if (err) {
                             console.log(err)
                         } else {
-                            console.log('insertNewPost')
                             res.status(200).send({ post })
                         }
                     })

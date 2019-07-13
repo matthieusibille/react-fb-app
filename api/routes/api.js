@@ -21,6 +21,9 @@ router.get('/user/', jsonWebToken.verifyToken, (req, res) =>{
 router.get('/users/', (req, res) =>{
     userModule.getUserList(req, res)
 })
+router.post('/edit-user/',jsonWebToken.verifyToken, (req, res) =>{
+    userModule.updateUserProfile(req, res)
+})
 
 //POSTS
 const postsModule = require('../modules/posts')

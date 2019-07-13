@@ -12,21 +12,29 @@ const bcrypt = require('bcrypt');
 module.exports= {
     
     login: (req, res) => {
-        const email = req.body.userId
+        
+        
+        const email = req.body.email
         const password = req.body.password
+        //console.log('req.body', email, password)
         User.findOne({ email: email }, {}, (err, userData) => {
+
             if (err) {
                 res.status(401)
             } else if (!userData) {
-                res.status(200).send({noUser:true})
+                //console.log('No userData', userData)
+                res.status(200).send( { noUser: true } )
             } else {
+                
                 const hash = userData.password
                 bcrypt.compare(password, hash, function (err, isValid) {
                     if (isValid) {
+                        
                         User.findOneAndUpdate( {"_id": userData._id}, { new: true }, (err, user) => {
                             if(err){
                                 console.log(err)
                             }else{
+                                /* console.log('User found', userData) */
                                 let payload = { subject: user._id };
                                 let tokenSigned = jwt.sign(payload, privateKey); 
                                 res.status(200).send( { token: tokenSigned, userData:user } )
@@ -38,6 +46,7 @@ module.exports= {
                     }
                 });
             }
+
         })
     },
 

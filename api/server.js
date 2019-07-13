@@ -1,8 +1,9 @@
+const config = require('./config');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-
 
 const PORT = 4000;
 const api = require('./routes/api') 
@@ -13,10 +14,10 @@ var server = http.createServer(app)
 
 //DATABASE
 const mongoose = require('mongoose');
-const db = ""
+const db = config.dbUri
 
 var corsOptions = {
-  origin: 'https://ms-demo-react.herokuapp.com',
+  origin: config.appUrl,
   optionsSuccessStatus: 200,
   credentials: true 
 }

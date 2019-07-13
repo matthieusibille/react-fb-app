@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/StackComponent.css'
+import '../scss/Stack.scss'
 
 function Stack() {
     return (
@@ -21,6 +21,11 @@ function Stack() {
             <ul>
                 <li>- Mongo DB</li>
             </ul>
+            <h3>
+                <a href="https://github.com/matthieusibille/react-fb-app" target="_blank" rel="noopener noreferrer">
+                    GithHub <i className="material-icons">open_in_new</i> 
+                </a>
+            </h3>
         </div>
     )
 }

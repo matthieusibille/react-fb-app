@@ -1,83 +1,65 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react';
+
+import '../scss/Header.scss';
+
+import { getUserData, clearUserData } from '../actions/userActions';
+import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
+
 import Login from './Login';
-import { connect } from 'react-redux'
-import '../css/HeaderComponent.css'
-import { getUserData, clearUserData } from '../actions/userActions'
+import Logo from './Logo';
 
+function Header(props) {
 
-class Header extends Component {
-    
-    constructor(props) {
-      super(props)
-    
-      this.state = { }
-    }
-    
-    
-    logOutHandler = () =>{
-        let token = localStorage.getItem('token');
-        this.props.onClearUserData(token)
-        
+    const logOutHandler = () => {
+        props.onClearUserData()
     }
 
-    componentDidMount(){
-        if( localStorage.getItem('token') ){
-            let token = localStorage.getItem('token');
-            this.props.onGetUserData(token)
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            props.onGetUserData()
         }
+    }, [])
+
+    if (props.display) {
+        return (
+            <header className="top">
+                <Logo />
+                <Login />
+            </header>
+        )
+    } else {
+        return (
+            <header className="top">
+                <Logo />
+                <div className="user">
+                    <Link to="/profile"><i className="material-icons">account_box</i> {props.username}</Link>
+                </div>
+                <button className="logout" onClick={logOutHandler} title="Se déconnecter"><i className="material-icons">exit_to_app</i></button>
+            </header>
+        )
     }
 
-    render(){
-        
-        if(this.props.display){
-            return (
-                <header className="top">
-                    <h1>
-                        <span className="center">
-                            Facebook du <span>Très</span> pauvre
-                        </span>
-                        <span className="stamp">Alpha</span>
-                    </h1>
-                    <Login />
-                </header>
-              )
-        }else{
-            return (
-                <header className="top">
-                    <h1>
-                        <span className="center">
-                            Facebook du <span>Très</span> pauvre
-                        </span>
-                        <span className="stamp">Alpha</span>
-                    </h1>
-                    <div className="user">{this.props.username}</div>
-                    <button className="logout" onClick={this.logOutHandler}>Déconnexion</button>
-                </header>
-             )
-        }
-
-    }
-  
 }
 
-const mapStateToProps = (state) =>{
-    if(state.user.token && state.user.user){
-        return{
-            display:false,
-            username:state.user.user.profile.username
+const mapStateToProps = (state) => {
+    if (state.data.token && state.data.user) {
+        return {
+            display: false,
+            username: state.data.user.profile.username
         }
-    }else{
-        return{
-            display:true
+    } else {
+        return {
+            display: true
         }
     }
-    
+
 }
 
-const mapDispatchToProps = (dispatch) =>{
-    return{
-        onGetUserData: (token) => { dispatch(getUserData(token)) },
-        onClearUserData: (token) => { dispatch(clearUserData(token) )}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onGetUserData: () => { dispatch(getUserData()) },
+        onClearUserData: () => { dispatch(clearUserData()) }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
